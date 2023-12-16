@@ -1,0 +1,105 @@
+%% Titelseite klarmachen
+%% einfacher Zeilenabstand AN
+\begin{titlepage}
+    \noindent\begin{minipage}[c][.18\textwidth][t]{.18\textwidth}
+        \flushleft
+        \includegraphics[width=\linewidth]{fom_logo.pdf}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[c][.18\textwidth][b]{.9\textwidth}
+        \rmfamily
+        {\addfontfeature{StylisticSet=4}\large {\addfontfeature{Kerning=Uppercase}FOM}~Hochschule~für~Oekonomie~\&~Management} \\
+        {\large Hochschulzentrum Köln}
+        \vspace{0.25cm}
+    \end{minipage}
+
+    \begin{flushleft}
+        
+        \vspace{2.0cm}
+        % \vspace{5.0cm} %% falls Platz für die Erlangung des Grads gebraucht wird
+
+        {
+            \rmfamily\Large
+            \texplatetype\\
+            \rmfamily\normalsize
+            \textit{\texplatemodule}\\
+        }
+
+        \vspace{1.0cm}
+        
+        % {
+        %     \rmfamily\normalsize
+        %     \textit{zur Erlangung des Grads eines}\\ 
+        %     \rmfamily\Large
+        %     Master of Science (M.\,Sc.)
+        % }
+
+        \vspace{1.0cm}
+
+        {
+            \rmfamily\normalsize
+            \textit{über das Thema}
+        }
+
+        \vspace{0.1cm}
+
+        {
+            \rmfamily\LARGE
+            %\sffamily
+            %\textbf{\texplatetitle}
+            \texplatetitle
+            % Analyse und Visualisierung von\\
+            % Beziehungen zwischen Musikern auf der\\
+            % Grundlage von Musik-Metadaten unter\\
+            % Anwendung von Methoden der sozialen\\
+            % Netzwerkanalyse\xspace
+        }
+
+        \vspace{1.0cm}
+        
+        {\rmfamily\normalsize
+            \textit{eingereicht von}\\
+            $if(by-author)$
+            $for(by-author)$
+                $if(it.name)$
+                    $it.name.literal$$if(it.note)$ -- $it.note.text$$endif$\\ 
+                $else$
+                    $it$
+                $endif$
+            $endfor$
+            $endif$         
+        }
+
+        % \vspace{0.5cm}
+        
+        % {
+        %     \rmfamily\large 
+        %     \texplateauthor
+        % }
+        
+        \vfill
+        
+        % \vspace{2.0cm}
+
+        \begin{multicols}{3}
+            % \large
+            \footnotesize
+            \rmfamily
+
+            \textsc{\addfontfeature{Kerning=Uppercase}\texplatesupervisortype}\\
+            \texplatesupervisor
+
+            \columnbreak
+
+            \textsc{\addfontfeature{Kerning=Uppercase}Abgabedatum}\\
+            {\addfontfeature{Numbers={Tabular, Lining}, Letters={Uppercase}}31.\,Juli\,2023} %\today
+            
+            \columnbreak
+
+            \textsc{\addfontfeature{Kerning=Uppercase}Matrikelnummer}\\
+            {\addfontfeature{Numbers={Tabular, Lining}, Letters={Uppercase}}\texplateauthorid}
+
+        \end{multicols}
+
+    \end{flushleft}
+\end{titlepage}

@@ -1,0 +1,19 @@
+\documentclass[
+$if(papersize)$
+paper=$papersize$,
+$endif$
+$for(classoptions)$
+  $classoptions$$sep$,
+$endfor$
+]{$documentclass$}
+
+\KOMAoption{toc}{
+    bibliography,
+    index,
+    indentunnumbered,
+    listof,
+    flat,
+    numberline
+}
+
+% \usepackage{scrhack}

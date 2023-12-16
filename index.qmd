@@ -1,0 +1,7 @@
+# Motivation und Relevanz
+
+Hallo Relevanz [vgl. @Barabasi_EmergenceScaling_1999, 23ff.]!
+
+# Pipeline
+
+![Vierstufige Architektur zur Gewinnung eines Datenkorpus aus Tagesschau-Artikeln und Wikidata-Entitäten [vgl. @Barabasi_EmergenceScaling_1999, 23]. Jede Stufe produziert ein Zwischenergebnis.](images/pipeline.png "Titel: Ein Elefant"){.ext #ref_a_figure short="Vierstufige Architektur zur Gewinnung eines Datenkorpus aus Tagesschau-Artikeln und Wikidata-Entitäten." latex-placement="htbp" width="70%"}

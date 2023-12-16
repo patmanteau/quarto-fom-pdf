@@ -1,0 +1,46 @@
+\usepackage{longtable,booktabs,array}
+\LTpre=0.1pt
+%% Erweiterte Optionen für Captions von Floats
+\usepackage[
+    position=below,
+    % tableposition=below,
+    % margin=15pt,
+    width=.90\textwidth,
+    format=plain,
+    % indention=2em,
+    font={normalsize, sf, singlespacing},
+    labelfont={normalsize, sf, it, singlespacing},
+    labelsep=colon,
+    skip=12pt plus 2pt minus 2pt
+]{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+
+\usepackage{subcaption}
+\usepackage{pdflscape}
+\usepackage{afterpage}
+
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+
+$if(multirow)$
+\usepackage{multirow}
+$endif$
+
+\usepackage{calc} % for calculating minipage widths
+
+%% -----------------------------------------
+%% Fortlaufende Nummerierung für
+%% figure und table
+%% -----------------------------------------
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}

@@ -1,0 +1,388 @@
+\input iftex.sty
+
+\ifLuaTeX
+\PassOptionsToPackage{luatex}{graphicsx}
+\PassOptionsToPackage{luatex,hyperref,RGB,usenames,svgnames,x11names,dvipsnames}{xcolor}
+\else
+\PassOptionsToPackage{hyperref,RGB,usenames,svgnames,x11names,dvipsnames}{xcolor}
+\fi
+
+\PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
+\PassOptionsToPackage{tuenc}{fontspec}
+
+% \DocumentMetadata % activate the PDF management (with options)
+% {
+    
+% }
+
+$doc-class.tex()$
+
+%% ----------------------------------------------------------------------------
+%% Schalter:
+%%      + Vorab- und Abgabeversion
+%%      + typearea oder geometry
+%% ----------------------------------------------------------------------------
+\usepackage{etoolbox}
+
+\newtoggle{final_version}
+$if(final_version)$
+\settoggle{final_version}{true}
+$else$
+\settoggle{final_version}{false}
+$endif$
+
+\newtoggle{debug}
+$if(debug)$
+\settoggle{debug}{true}
+$else$
+\settoggle{debug}{false}
+$endif$
+
+
+\newtoggle{TG_use_geometry}
+$if(geometry)$
+\settoggle{TG_use_geometry}{true}
+$else$
+\settoggle{TG_use_geometry}{false}
+$endif$
+
+\iftoggle{final_version}{%
+    \KOMAoption{draft}{false}%
+    \PassOptionsToPackage{final}{bookmark}%
+}{%
+    \KOMAoption{draft}{true}%
+    \PassOptionsToPackage{draft}{bookmark}%
+}
+
+$pandoc.tex()$
+
+\iftoggle{debug}{%
+$_debug.tex()$
+}{}
+
+$_configuration.tex()$
+
+%% ----------------------------------------------------------------------------
+%% Erweiterte Farbdefinitionen
+%% ----------------------------------------------------------------------------
+
+\usepackage[usenames, dvipsnames]{xcolor}
+
+\definecolorset{RGB}{tol_dark_}{}{%
+    blue,    34, 34, 85;%
+    cyan,    34, 85, 85;%
+    green,   34, 85, 34;%
+    yellow, 102,102, 51;%
+    red,    102, 51, 51;%
+    grey,    85, 85, 85%
+}
+
+\definecolorset{RGB}{tol7q}{}{%
+    1,51,34,136;%
+    2,136,204,238%
+}
+
+%% ----------------------------------------------------------------------------
+%% Sprachspezifika
+%% ----------------------------------------------------------------------------
+
+% \usepackage{polyglossia}
+% \setdefaultlanguage{german}
+% \setotherlanguages{english,french}
+\usepackage[main=ngerman,english,french]{babel}
+
+% Namen für \autoref-Ziele
+\gappto\captionsngerman{\def\abbreviationsname{Abkürzungen}}
+\gappto\captionsngerman{\def\glossaryname{Abkürzungen}}
+\gappto\captionsngerman{\def\figureautorefname{Abbildung}}
+\gappto\captionsngerman{\def\tableautorefname{Tabelle}}
+\gappto\captionsngerman{\def\partautorefname{Teil}}
+\gappto\captionsngerman{\def\appendixautorefname{Anhang}}
+\gappto\captionsngerman{\def\equationautorefname{Gleichung}}
+\gappto\captionsngerman{\def\chapterautorefname{Kapitel}}
+\gappto\captionsngerman{\def\sectionautorefname{Abschnitt}}
+\gappto\captionsngerman{\def\subsectionautorefname{Abschnitt}}
+\gappto\captionsngerman{\def\subsubsectionautorefname{Abschnitt}}
+\gappto\captionsngerman{\def\Hfootnoteautorefname{Fußnote}}
+\gappto\captionsngerman{\def\pageautorefname{Seite}}
+
+% Verzeichnisse umbenennen
+% s. https://komascript.de/~mkohm/scrguide.pdf Tab. 12.1
+% \renewcaptionname{ngerman}{\abstractname}{}
+% \renewcaptionname{ngerman}{\alsoname}{}
+% \renewcaptionname{ngerman}{\appendixname}{}
+% \renewcaptionname{ngerman}{\bibname}{}
+% \renewcaptionname{ngerman}{\ccname}{}
+% \renewcaptionname{ngerman}{\chaptername}{}
+% \renewcaptionname{ngerman}{\contentsname}{}
+% \renewcaptionname{ngerman}{\enclname}{}
+% \renewcaptionname{ngerman}{\figurename}{}
+% \renewcaptionname{ngerman}{\glossaryname}{}
+% \renewcaptionname{ngerman}{\headtoname}{}
+% \renewcaptionname{ngerman}{\indexname}{}
+% \renewcaptionname{ngerman}{\listfigurename}{}
+% \renewcaptionname{ngerman}{\listtablename}{}
+% \renewcaptionname{ngerman}{\pagename}{}
+% \renewcaptionname{ngerman}{\partname}{}
+% \renewcaptionname{ngerman}{\prefacename}{}
+% \renewcaptionname{ngerman}{\proofname}{}
+% \renewcaptionname{ngerman}{\refname}{Literatur}
+% \renewcaptionname{ngerman}{\seename}{}
+% \renewcaptionname{ngerman}{\tablename}{}
+
+\renewcaptionname{ngerman}{\contentsname}{Inhalt}
+\renewcaptionname{ngerman}{\glossaryname}{Abkürzungen}
+\renewcaptionname{ngerman}{\listfigurename}{Abbildungen}
+\renewcaptionname{ngerman}{\listtablename}{Tabellen}
+\renewcaptionname{ngerman}{\figurename}{Abbildung}
+\renewcaptionname{ngerman}{\tablename}{Tabelle}
+
+%% ----------------------------------------------------------------------------
+%% Bibliographie
+%% ----------------------------------------------------------------------------
+\usepackage[$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
+
+% keine Monospace für URLs
+\usepackage{xurl}
+% \setcounter{biburllcpenalty}{7000}
+% \setcounter{biburlucpenalty}{8000}
+\urlstyle{rm}
+
+\DefineBibliographyStrings{ngerman}{%
+%   andothers = {und andere},
+%   urlseen   = {Zugriff am:},
+  urlfrom   = {verfügbar unter},
+}
+
+%% ----------------------------------------------------------------------------
+%% Seitenlayout
+%% ----------------------------------------------------------------------------
+
+\usepackage{scrlayer-scrpage}
+\pagestyle{scrheadings}
+% \automark{section}
+
+%% Angenommen, Sie wollen, dass Abschnittsüberschriften im Kolumnentitel ohne
+%% Gliederungsnummer gesetzt werden, so ist das ganz einfach mit:
+% \renewcommand*{\sectionmarkformat}{}
+
+\ihead[]{\headmark} 
+% \ihead[]{} 
+\chead*{}
+\ohead*{\pagemark}
+\iftoggle{final_version}{%
+    \cfoot*{}%
+}{%
+    \cfoot*{\textcolor{tol_dark_cyan}{DRAFT}}%
+}
+
+\iftoggle{TG_use_geometry}{
+    \usepackage[
+        left=\texplatemarginleft,
+        right=\texplatemarginright,
+        top=\texplatemargintop,
+        bottom=\texplatemarginbottom,
+        $papersize$paper
+    ]{geometry}
+}{}
+
+% $_math.tex()$
+
+%% Schöne Grafiken
+\usepackage{pgf,tikz}
+
+%% Todo-Notizen
+%\usepackage{todonotes}
+
+%% Paket für Zeilennummern laden
+%\usepackage{lineno}
+
+%% Automatische Zwischenräume nach Abkürzungen (s. commands.tex)
+\usepackage{xspace}
+
+%% PDF-spezifische Optionen -> Grafiken und Hyperlinks im PDF
+\usepackage{ifpdf}
+
+%% Bunte, gerahmte Boxen für alles
+\usepackage{tcolorbox}
+
+%% Mehrspaltiger Satz
+\usepackage{multicol}
+
+%% pdfpages zum Einbinden externer PDFs mit \includepdf
+% \usepackage{pdfpages}
+
+%% enumitem zum Konfigurieren des vertikalen Spacing in Listen
+\usepackage{enumitem}
+
+%% SI-Einheiten
+\usepackage{siunitx}
+
+$_typography.tex()$
+
+$_fonts.tex()$
+
+$_commands.tex()$
+
+$_code.tex()$
+
+%% ----------------------------------------------------------------------------
+%% Quotation einrichten
+%% ----------------------------------------------------------------------------
+\iftoggle{final_version}{%
+    \usepackage[strict=true,autostyle,german=guillemets,french=guillemets]{csquotes} % "Releasemodus"
+}{%
+    \usepackage[strict=false,debug=true,german=guillemets,french=guillemets]{csquotes} % "Debugmodus"
+}
+% \SetBlockThreshold{3}         % Blockquote ab 3 Zeilen
+% \SetBlockEnvironment{quote}   % Name des Environments für Blockquotes (bspw. "quote")
+\SetCiteCommand{\autocite}      % Das Zitationskommando (default: \cite)
+% \SetCiteCommand{\parencite}
+% \renewcommand{\mkcitation}[1]{ #1}  % Doppelte Klammern um \textquote-Zitierungen verhindern
+
+\usepackage{hyperref}
+\usepackage{bookmark}
+\hypersetup{
+    colorlinks = true,
+    linkcolor = {},
+    citecolor = {RawSienna},
+    urlcolor = {RawSienna},
+    pdfpagemode = {UseOutlines},
+    pdftitle    = {\texplatetitle},
+    pdfsubject  = {\texplatesubject},
+    pdfauthor   = {\texplateauthor},
+    pdfpagelayout = {TwoColumnRight}
+}
+% \bookmarksetup{
+%     color = {tol_dark_red}
+% }
+
+%% ----------------------------------------------------------------------------
+%% Glossar und Abkürzungsverzeichnis
+%% ----------------------------------------------------------------------------
+
+\usepackage[
+    xindy={language=german-duden,codepage=utf8},
+    toc,
+    numberline,
+    abbreviations,
+    nonumberlist, % um Rückreferenzen zu unterdrücken
+    nopostdot
+]{glossaries-extra}
+\usepackage{glossary-longragged}
+\usepackage{glossaries-extra-stylemods}
+
+\makeglossaries
+\setglossarystyle{longragged}
+\setabbreviationstyle{long-short-sc}
+% \loadglsentries{texplate/glossar}
+
+%% ----------------------------------------------------------------------------
+%% Datum setzen
+%% ----------------------------------------------------------------------------
+\date{}
+
+%% ----------------------------------------------------------------------------
+%% Bibliographie erzeugen
+%% ----------------------------------------------------------------------------
+
+
+%% ----------------------------------------------------------------------------
+%% Bibliographie erzeugen
+%% ----------------------------------------------------------------------------
+\addbibresource{$bibliography$}
+% \bibliography{library}{}
+
+%% ----------------------------------------------------------------------------
+%% Seitenspiegel neuberechnen
+%% ----------------------------------------------------------------------------
+\nottoggle{TG_use_geometry}{\recalctypearea}{}
+
+%% ----------------------------------------------------------------------------
+%% itemize-Aufzählungen konfigurieren
+%% ----------------------------------------------------------------------------
+%% 
+\setlist{noitemsep} % ohne Raum zwischen den Elementen
+%% \setlist{nosep} % ohne Raum zwischen den Elementen und ohne Raum um die Aufzählung
+
+%% Dokumentstart
+\begin{document}
+
+%% Römische Ziffern beim Vorspiel... (Titel, Inhaltsverzeichnis etc.)
+\pagenumbering{Roman}
+
+
+%% Inhaltsverzeichnis sowie Abkürzungs-, Abbildungs-, Tabellen- und Quellcodeverzeichnis ausgeben (mit einfachem Zeilenabstand)
+\begin{singlespace}
+    % Satzspiegel neuberechnen
+    \nottoggle{TG_use_geometry}{\recalctypearea}{}
+    
+    
+    %% Titelseite definieren und ausgeben
+    % \input{texplate/deckblatt.tex}
+    $_titlepage.tex()$
+    % \includepdf{../assets/deckblatt.pdf}
+
+    %% Seiten erst ab Inhaltsverzeichnis zählen,
+    %% s. Leitfaden S.3 Punkt 11
+    \setcounter{page}{1}
+
+    \microtypesetup{protrusion=false} % Kein optischer Randausgleich für Verzeichnisse
+    \tableofcontents
+
+    \newpage
+    %% Abkürzungsverzeichnis ausgeben
+    \setcounter{table}{599}
+    \printglossary[type=\glsxtrabbrvtype]
+    % \printglossaries
+    %% Fix für fehlerhafte Tabellennummerierung durch glossaries-Styles,
+    %% die longtables verwenden. Auf jeden Fall im fertigen Dokument checken!
+    \setcounter{table}{0}
+    \newpage
+
+    %% Abbildungsverzeichnis ausgeben
+    \listoffigures
+    \newpage
+
+    %% Tabellenverzeichnis ausgeben
+    \listoftables
+    \newpage
+
+    % Listingverzeichnis ausgeben
+    % \listoflistings
+    % \newpage
+
+    % \setcounter{table}{599}
+    % \printglossary[type=\glsdefaulttype]
+    % \setcounter{table}{0}
+    % \newpage
+
+    \microtypesetup{protrusion=true} % optischen Randausgleich wieder anwerfen
+
+\end{singlespace}
+
+% \begin{onehalfspace}
+    % Satzspiegel neuberechnen
+    \nottoggle{TG_use_geometry}{\recalctypearea}{}
+
+    %% neue Seite,... (s. http://texwelt.de/wissen/fragen/18/was-ist-der-unterschied-zwischen-newpage-pagebreak-und-clearpage)
+    \newpage
+    %% arabische Ziffern,...
+    \pagenumbering{arabic}
+
+    %% ogogogogogogogogogogo!
+    $body$
+    
+
+    %% Seitenumbruch, vorher verbleibende Flaots ausgeben
+    \clearpage
+% \end{onehalfspace}
+
+$biblio.tex()$
+
+$if(declaration-in-lieu-of-oath)$
+$_declaration.tex()$
+$endif$
+
+\end{document}
+

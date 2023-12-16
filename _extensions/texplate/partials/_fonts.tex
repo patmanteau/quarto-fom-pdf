@@ -1,0 +1,108 @@
+\SetTracking[
+    spacing = {45*,,},
+    outer spacing = {30*,,}
+]{
+    encoding= *,
+    shape = sc
+}{10}
+
+\SetTracking[
+    context = allcaps,
+    spacing = {400*,,},
+    outer spacing = {300*,,}
+]{
+    encoding = *
+}{50}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Kerninganpassungen
+%% s. https://tex.stackexchange.com/a/370469
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \directlua{
+% fonts.handlers.otf.addfeature {
+%     name = "cuskern",
+%     type = "kern",
+%     data = {
+%         ["f"] = { 
+%             ["1"] =  2000,
+%             ["2"] =  200 
+%         },
+%     },
+% }}
+
+\setmainfont{Stix Two Text}[
+    Ligatures       = {Common,TeX},
+    Scale           = 0.94, % 0.94 makes it about Times New Roman size
+    Numbers         = {OldStyle},
+     Contextuals     = {Alternate}
+]
+\setmathfont{Stix Two Math} 
+
+
+% % Serifenschrift...
+% \setmainfont{SkolarPE}[
+%     Path            = fonts/,
+%     Extension       = .otf,
+%     UprightFont     = *-Regular,
+%     BoldFont        = *-Semibold,
+%     ItalicFont      = *-Italic,
+%     BoldItalicFont  = *-SemiboldItalic,
+%     RawFeature      = +cuskern,
+%     Ligatures       = {Common,TeX},
+%     Scale           = 0.94, % 0.94 makes it about Times New Roman size
+%     Numbers         = {OldStyle},
+%     % Renderer        = Harfbuzz,
+%     Contextuals     = {Alternate}
+% ]
+
+% % Serifenlose...
+% \setsansfont{SkolarSansPE}[
+%     Path            = fonts/,
+%     Extension       = .otf,
+%     UprightFont     = *-Rg,
+%     BoldFont        = *-Bd,
+%     ItalicFont      = *-It,
+%     BoldItalicFont  = *-BdIt,
+%     Ligatures       = {Common, TeX},
+%     Scale           = 0.94,
+%     Numbers         = {OldStyle},
+%     Contextuals     = {Alternate}
+% ]
+
+% % Nichtproportionale Schrift...
+% \setmonofont{Iosevka}[Scale=MatchLowercase]
+
+% % Matheschrift
+% \setmathfont{Cambria Math}[
+%     Ligatures=TeX,
+%     Scale=MatchLowercase
+% ]
+
+% \setmathfontface\mathoper{Cambria Math}[
+%     Ligatures=TeX,
+%     Scale=MatchLowercase
+% ]
+% \setoperatorfont\mathoper
+
+% %% Fancy Schauschrift
+% \newfontface\fancyheadline{SkolarSansPE-Eb}[
+%     Path            = fonts/,
+%     Extension       = .otf,
+%     UprightFont     = SkolarSansPE-Eb,
+%     Ligatures=TeX
+% ]
+
+% %% Fancy Schauschrift
+% \newfontface\fancysemibold{SkolarPE-Semibold}[
+%     Path            = fonts/,
+%     Extension       = .otf,
+%     ItalicFont=SkolarPE-SemiboldItalic,
+%     Ligatures={Common, TeX},
+%     Numbers={OldStyle},
+%     Contextuals={Alternate}
+% ]
+
+
