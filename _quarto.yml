@@ -2,10 +2,8 @@ project:
   type: book
 lang: de-DE
 texplate:
-  author: Patrick Haas
-  matrikel: 311431
   deadline: 31.7.2023
-  supervisor: Prof. Dr. Michael Colombo
+  supervisor: Prof. Dr. Jean Dupont
   location: Köln
 
 book:
@@ -58,7 +56,7 @@ bibliography: references.bib
 format:
   html:
     theme: yeti
-  texplate-pdf:
+  fom-pdf:
     latex-output-dir: out
     latex-clean: true
     keep-tex: true
