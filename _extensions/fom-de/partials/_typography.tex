@@ -202,7 +202,20 @@
     linefill            = {\TOCLineLeaderFill[.]}
 ]{tocline}{figure, table}
 
+%% ----------------------------------------------------------------------------
+%%
+%% Captions
+%%
+%% ----------------------------------------------------------------------------
+% \addtokomafont{caption}{%
+%     \rmfamily\mdseries\small}
+% \addtokomafont{captionlabel}{%
+%     \rmfamily\bfseries\small}
 
+\captionsetup{%
+    textfont={rm, small},
+    labelfont={rm, bf, small},
+}
 
 %% ----------------------------------------------------------------------------
 %%
