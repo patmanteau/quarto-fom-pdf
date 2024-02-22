@@ -31,7 +31,7 @@ contributes:
       - headinclude=false
       - footinclude=true
       - footlines=2
-      - captions=below
+      - captions=tableheading
       - hidelinks
       - footnotes=multiple
       - twoside=false
