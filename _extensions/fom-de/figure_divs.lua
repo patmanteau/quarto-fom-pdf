@@ -2,7 +2,6 @@
 -- ```markdown
 -- ![Erträge von Food-Trucks [vgl. @Perez_PythonEcosystem_2011, 13]](../assets/ex1_food_truck_profit.pdf){.ext #ref_a_figure short="This is a short figure caption" placement="htbp" width="70%"}
 -- ```
-
 Latex_includegraphics = pandoc.template.compile([[
 \begin{figure}$if(placement)$[$placement$]$endif$
 $if(identifier)$\hypertarget{$identifier$}$endif$
@@ -31,22 +30,24 @@ local function convert_text(text)
     return pandoc.write(pandoc.read(text), "latex", { cite_method = "biblatex" }):trim()
 end
 
-local function render_extended_figure(image)
-    local short_caption = image.attributes['short']
-    if short_caption then
-        short_caption = convert_text(short_caption)
-    end
-    local placement = image.attributes['latex-placement'] or ''
-    local identifier = image.identifier
-    local width = image.attributes['width'] or ''
-    if width and string.find(width, '%%') then
-        width = width:gsub('%%', '')
-        width = string.format("%.2f", tonumber(width) / 100)
-    end
+local function render_extended_figure(figure)
+    -- logging.temp('image', image)
 
-    local path = image.src
+    if figure.attributes['short'] then
+        local short_caption = convert_text(figure.attributes['short'])
+    end
+    
+    -- local placement = image.attributes['latex-placement'] or ''
+    -- local identifier = image.identifier
+    -- local width = image.attributes['width'] or ''
+    -- if width and string.find(width, '%%') then
+    --     width = width:gsub('%%', '')
+    --     width = string.format("%.2f", tonumber(width) / 100)
+    -- end
 
-    local caption = pandoc.write(pandoc.Pandoc(pandoc.Span(image.caption)), 'latex', { cite_method = 'biblatex' }):trim()
+    -- local path = image.src
+
+    -- local caption = pandoc.write(pandoc.Pandoc(pandoc.Span(image.caption)), 'latex', { cite_method = 'biblatex' }):trim()
 
     local context = {
         placement = placement,
@@ -68,10 +69,15 @@ local function render_extended_figure(image)
     return pandoc.RawInline('latex', pandoc.layout.render(tex))
 end
 
+local function render_pandoc(pandoc)
+    quarto.log.output(pandoc)
+end
+
 if quarto.doc.is_format("pdf") then
     return {
         {
-            Image = render_extended_figure
+            -- Figure = render_extended_figure,
+            Figure = render_pandoc
         }
     }
 end
