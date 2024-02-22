@@ -90,6 +90,6 @@ contributes:
 
       filters:
       - drop_bibliography.lua
-      - figure_divs.lua
+      # - figure_divs.lua
       - map_abbreviations.lua
       - komatize_unnumbered.lua
