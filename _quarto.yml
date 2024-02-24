@@ -60,6 +60,3 @@ format:
     latex-output-dir: out
     latex-clean: true
     keep-tex: true
-  wordcount-pdf: default
-  wordcount-html: default
-    
