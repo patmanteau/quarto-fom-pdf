@@ -1,12 +1,17 @@
 %% Für das Literaturverzeichnis wieder einfacher Zeilenabstand
 \begin{singlespace}
+    $if(nocite-ids)$
+    \nocite{$for(nocite-ids)$$it$$sep$, $endfor$}
+    $endif$
     % Satzspiegel neuberechnen
     \nottoggle{TG_use_geometry}{\recalctypearea}{}
 
     %% Hack zur Vermeidung von overfull hboxes im Litverzeichnis
     \emergencystretch=1em
     %% Literaturverzeichnis ausgeben
-    \printbibliography[heading=bibintoc]
+    \printbibliography[heading=bibintoc, notkeyword=AITool]
+    \newpage
+    \printbibliography[heading=bibintoc, keyword=AITool, title={KI-Werkzeuge}]
     %% neue Seite
     % \newpage
 \end{singlespace}
